@@ -13,7 +13,7 @@ import random
 import string
 
 
-WORDLIST_FILENAME = "D:\\Programing\\python_university\\borysenko\\Python_Practices\\python_practices\\Task1\\words.txt" 
+WORDLIST_FILENAME = "words.txt" 
 
 
 
