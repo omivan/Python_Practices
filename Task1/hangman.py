@@ -13,7 +13,7 @@ import random
 import string
 
 
-WORDLIST_FILENAME = "words.txt" 
+WORDLIST_FILENAME = "D:\\Programing\\python_university\\borysenko\\Python_Practices\\python_practices\\Task1\\words.txt" 
 
 
 
@@ -53,8 +53,7 @@ def get_guessed_word(secret_word, letters_guessed):
     correct_letters = list()
     for x in secret_word:
       if(x in letters_guessed): correct_letters.append(x)
-      else: correct_letters.append('_')
-
+      else: correct_letters.append('_ ')
 
     return ''.join(correct_letters)
 
@@ -68,9 +67,8 @@ def get_available_letters(letters_guessed):
     
     
 def is_vowel(letter):
-  vowels = ('a', 'e', 'i', 'o', 'u')   
-  if(letter in vowels): return True
-  else: return False
+  vowels = 'aeiou'   
+  return (letter in vowels)
 
 def read(warnings, lives):
     while(True):
@@ -164,7 +162,6 @@ def match_with_gaps(my_word, other_word):
     temp = list()
    
     my_word = my_word.replace(" ", "")
-    other_word = other_word.replace(" ", "")
     if(len(my_word) != len(other_word)): return False
     for i in range(0, len(my_word)):
       if(my_word[i] != '_' and my_word[i] != other_word[i]): return False
@@ -174,7 +171,7 @@ def match_with_gaps(my_word, other_word):
         if(other_word[i] == other_word[j]):
           temp.append(my_word[j])
       flag = 1
-      if(temp[0] == '_'): flag = 0
+      if (temp[0] == '_'): flag = 0
       for x in temp:
         if((x == '_' and flag == 1) or (x != '_' and flag == 0)): return False
 
