@@ -13,8 +13,7 @@ import random
 import string
 
 
-WORDLIST_FILENAME = "words.txt" 
-
+WORDLIST_FILENAME = "words.txt"
 
 
 def load_words():
@@ -106,10 +105,10 @@ def is_vowel(letter):
   vowels = 'aeiou'   
   return (letter in vowels)
 
-def read(warnings, lives):
+def read(warnings, lives, letters_guessed):
     while(True):
         try:
-          letter = input("Make your guess! Please use only latin letters: ")
+          letter = input("Please guess a letter: ")
           if(len(letter) > 1 or not letter.isalpha()):
             raise TypeError
           else: break
@@ -122,10 +121,11 @@ def read(warnings, lives):
             if(lives == 0):
               break 
           else:
-            print('You have ' + str(warnings) + ' warnings left. Be carefull next time')  
+            print('You have ' + str(warnings) + ' warnings left. Be carefull next time') 
+          print(get_guessed_word(secret_word, letters_guessed) + "\n----------------------") 
     return letter, warnings, lives
 
-def read_with_hints(warnings, lives):
+def read_with_hints(warnings, lives, letters_guessed):
     while(True):
         try:
           letter = input("Make your guess! Please use only latin letters: ")
@@ -142,6 +142,7 @@ def read_with_hints(warnings, lives):
               break 
           else:
             print('You have ' + str(warnings) + ' warnings left. Be carefull next time')  
+          print(get_guessed_word(secret_word, letters_guessed) + "\n----------------------") 
     return letter, warnings, lives
 
 
@@ -176,8 +177,9 @@ def hangman(secret_word):
     print('Welcome to the game Hangman!\nI am thinking of a word that is ' + str(len(secret_word)) + ' letters long.\n----------------------')
     while(True):
       print('You have ' + str(lives) + ' guesses left.')
+      print("You have " +  str(warnings) + " warnings lef")
       print('Available letters: ' + get_available_letters(letters_guessed))
-      letter, warnings, lives = read(warnings, lives)
+      letter, warnings, lives = read(warnings, lives, letters_guessed)
       if(lives == 0):
         print("Game is over, you lost :(\nThe word was " + secret_word)
         break
@@ -299,10 +301,11 @@ def hangman_with_hints(secret_word):
     warnings = 3
     letters_guessed = list()
     print('Welcome to the game Hangman!\nI am thinking of a word that is ' + str(len(secret_word)) + ' letters long.\n----------------------')
+    print("You have " +  str(warnings) + " warnings left")
     while(True):
       print('You have ' + str(lives) + ' guesses left.')
       print('Available letters: ' + get_available_letters(letters_guessed))
-      letter, warnings, lives = read_with_hints(warnings, lives)
+      letter, warnings, lives = read_with_hints(warnings, lives, letters_guessed)
       if(lives == 0):
         print("Game is over, you lost :(\nThe word was " + secret_word)
         break
